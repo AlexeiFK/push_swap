@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack.h                                         :+:      :+:    :+:   */
+/*   ft_lstiter2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/15 22:09:38 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/17 18:43:30 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/17 18:35:53 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/17 18:40:52 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct		s_stack
-{
-	t_list			*elem;
-	int				size;
-}					t_stack;
+#include "libft.h"
 
-typedef struct		t_elem
+void	ft_lstiter2(t_list *lst, t_list *lst2, void (*f)(t_list *elem, t_list *elem2))
 {
-	int				num;
-	int				empty;
-}					t_elem;
-
-void	ft_lstiter2(t_list *lst, t_list *lst2, void (*f)(t_list *elem, t_list *elem2));
-void	*ft_stackpop(t_stack *stack);
-void	*ft_stackpush(t_stack *stack, void *content);
-void	*ft_stackprint(t_stack *stack);
+	while (lst && lst2)
+	{
+		(*f)(lst, lst2);
+		lst = lst->next;
+		lst2 = lst2->next;
+	}
+}

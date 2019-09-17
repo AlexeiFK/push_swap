@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/17 20:39:25 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/17 23:47:06 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int		ft_strisdig(char *str)
 	i = 0;
 	if (str[i] == '\0')
 		return (0);
-	i++;
 	if (ft_isdigit(str[i]) == 0 && str[i] != '-')
 		return (0);
+	i++;
 	while (str[i] != '\0')
 	{
 		if (ft_isdigit(str[i]) == 0)
@@ -68,11 +68,9 @@ int		ft_strisdig(char *str)
 int		read_push(t_elem **elems, char **argv, int argc)
 {
 	int				i;
-	int				j;
 	long long int	tmp;
 
 	i = 1;
-	j = 0;
 	while (i < argc)
 	{
 		if (ft_strisdig(argv[i]) == 0)
@@ -80,9 +78,8 @@ int		read_push(t_elem **elems, char **argv, int argc)
 		tmp = ft_atoll(argv[i]);
 		if (tmp > INT_MAX || tmp < INT_MIN)
 			return (0);
-		elems[j]->num = tmp; 
-		elems[j]->empty = 0;
-		j++;
+		elems[i - 1]->num = tmp; 
+		elems[i - 1]->empty = 0;
 		i++;
 	}
 	return (1);
@@ -102,7 +99,7 @@ void	f_sa(t_elem **a)
 	int		i;
 
 	i = 0;
-	while (a[i]->empty != 0 && a[i] != NULL)
+	while (a[i] != NULL && a[i]->empty != 0)
 		i++;
 	if (a[i] == NULL || a[i + 1] == NULL)
 		return ;
@@ -112,25 +109,103 @@ void	f_sa(t_elem **a)
 void	f_ss(t_elem **a, t_elem **b)
 {
 	f_sa(a);
-	f_sb(b);
+	f_sa(b);
 }
 
-void	f_pa(t_elem **a)
+void	f_pb(t_elem **a, t_elem **b)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (a[i] != NULL && a[i]->empty != 0)
+		i++;
+	if (a[i] == NULL)
+		return ;
+	while (b[j] != NULL && b[j]->empty != 0)
+		j++;
+	j--;
+	ft_swapint(&a[i]->num, &b[j]->num);
+	ft_swapint(&a[i]->empty, &b[j]->empty);
+}
+
+void	f_pa(t_elem **a, t_elem **b)
+{
+	f_pb(b, a);
+}
+
+void	f_ra(t_elem **a)
 {
 	int		i;
 
 	i = 0;
-	while (a[i]->empty != 0 && a[i] != NULL)
+	while (a[i] != NULL && a[i]->empty != 0)
 		i++;
 	if (a[i] == NULL || a[i + 1] == NULL)
 		return ;
-	ft_swapint(&a[i]->num, &a[i + 1]->num);
+	while (a[i + 1] != NULL)
+	{
+		ft_swapint(&a[i]->num, &a[i + 1]->num);
+		i++;
+	}
+}
+
+void	f_rra(t_elem **a)
+{
+	int		i;
+
+	i = 0;
+	while (a[i + 1] != NULL)
+		i++;
+	while (i > 1 && a[i - 1]->empty != 1)
+	{
+		ft_swapint(&a[i]->num, &a[i - 1]->num);
+		i--;
+	}
+}
+
+void	f_rrr(t_elem **a, t_elem **b)
+{
+	f_rra(a);
+	f_rra(b);
+}
+
+void	f_rr(t_elem **a, t_elem **b)
+{
+	f_ra(a);
+	f_ra(b);
+}
+
+int		sort_elems(t_elem **a, int size, t_elem **mark)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size - 1)
+		{
+			if (a[j]->num > a[j + 1]->num)
+				ft_swapint(&a[j]->num, &a[j + 1]->num);
+			j++;
+		}
+		i++;
+	}
+	while (i > (size / 2))
+	{
+		i--;
+	}
+	return (a[i]->num);
 }
 
 int		main(int argc, char **argv)
 {
 	t_elem	**a;
 	t_elem	**b;
+	t_elem	**t;
 	int		i;
 	int		size;
 	int		ret;
@@ -138,8 +213,18 @@ int		main(int argc, char **argv)
 	size = argc - 1;
 	a = new_arr_elem(size);
 	b = new_arr_elem(size);
+	t = new_arr_elem(size);
 	ret = read_push(a, argv, argc);
+	read_push(t, argv, argc);
 	ft_printf("ret = %d\n", ret);
+	ft_printf("mid = %d\n", sort_elems(t, size));
+	i = 0;
+	while (i < size)
+	{
+		ft_printf("%d ", t[i]->num);
+		i++;
+	}
+	ft_printf("\n");
 	i = 0;
 	while (a[i] != NULL)
 	{
@@ -156,11 +241,11 @@ int		main(int argc, char **argv)
 		ft_printf("\n");
 		i++;
 	}
-	f_sa(a);
-	f_sa(a);
-	f_sa(a);
-	f_sa(a);
-	f_sa(a);
+
+
+
+
+	ft_printf("--------------\n");
 	i = 0;
 	while (a[i] != NULL)
 	{
