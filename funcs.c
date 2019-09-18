@@ -1,12 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack.h                                         :+:      :+:    :+:   */
+/*   funcs.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/15 22:09:38 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/18 17:25:47 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/18 17:17:37 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/18 17:42:11 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
+#include "ft_pushswap.h"
+
+void	ft_swapint(int *a, int *b)
+{
+	int		tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	f_rrr(t_elem **a, t_elem **b)
+{
+	f_rra(a);
+	f_rra(b);
+}
+
+void	f_rr(t_elem **a, t_elem **b)
+{
+	f_ra(a);
+	f_ra(b);
+}
