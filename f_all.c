@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:41:45 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/18 17:42:04 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/19 21:45:53 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	f_all3(const char *com, t_elem **a, t_elem **b)
 		f_rra(a);
 		ft_putstr("rra\n");
 	}
-	else if(ft_strequ(com, "rrb") == 1)
+	else if (ft_strequ(com, "rrb") == 1)
 	{
 		f_rra(b);
 		ft_putstr("rrb\n");
@@ -32,6 +32,7 @@ void	f_all3(const char *com, t_elem **a, t_elem **b)
 		ft_putstr("rrr\n");
 	}
 }
+
 void	f_all2(const char *com, t_elem **a, t_elem **b)
 {
 	if (ft_strequ(com, "pb") == 1)
@@ -39,7 +40,7 @@ void	f_all2(const char *com, t_elem **a, t_elem **b)
 		f_pa(b, a);
 		ft_putstr("pb\n");
 	}
-	else if(ft_strequ(com, "ra") == 1)
+	else if (ft_strequ(com, "ra") == 1)
 	{
 		f_ra(a);
 		ft_putstr("ra\n");
@@ -56,6 +57,7 @@ void	f_all2(const char *com, t_elem **a, t_elem **b)
 	}
 	f_all3(com, a, b);
 }
+
 void	f_all(const char *com, t_elem **a, t_elem **b)
 {
 	if (ft_strequ(com, "sa") == 1)

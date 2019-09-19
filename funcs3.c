@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter2.c                                      :+:      :+:    :+:   */
+/*   funcs3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/17 18:35:53 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/17 18:40:52 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/19 21:49:42 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/19 21:51:50 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
+#include "ft_pushswap.h"
 
-void	ft_lstiter2(t_list *lst, t_list *lst2, void (*f)(t_list *elem, t_list *elem2))
+void	f_pb(t_elem **a, t_elem **b)
 {
-	while (lst && lst2)
-	{
-		(*f)(lst, lst2);
-		lst = lst->next;
-		lst2 = lst2->next;
-	}
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (a[i] != NULL && a[i]->empty != 0)
+		i++;
+	if (a[i] == NULL)
+		return ;
+	while (b[j] != NULL && b[j]->empty != 0)
+		j++;
+	j--;
+	ft_swapint(&a[i]->num, &b[j]->num);
+	ft_swapint(&a[i]->empty, &b[j]->empty);
+}
+
+void	f_pa(t_elem **a, t_elem **b)
+{
+	f_pb(b, a);
 }

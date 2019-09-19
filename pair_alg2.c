@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   funcs2.c                                           :+:      :+:    :+:   */
+/*   pair_alg2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 17:40:52 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:51:05 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/19 20:55:37 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/19 21:08:51 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 #include "ft_pushswap.h"
 
-void	f_sa(t_elem **a)
+#include <limits.h>
+#include <stdlib.h>
+
+int		is_wrong(t_elem **a)
 {
 	int		i;
 
@@ -22,42 +24,32 @@ void	f_sa(t_elem **a)
 	while (a[i] != NULL && a[i]->empty != 0)
 		i++;
 	if (a[i] == NULL || a[i + 1] == NULL)
-		return ;
-	ft_swapint(&a[i]->num, &a[i + 1]->num);
+		return (0);
+	if (a[i]->num < a[i + 1]->num)
+		return (1);
+	else
+		return (0);
 }
 
-void	f_ss(t_elem **a, t_elem **b)
+int		find_indexes(t_elem **a, int e1, int e2, int *i2)
 {
-	f_sa(a);
-	f_sa(b);
-}
-
-void	f_ra(t_elem **a)
-{
+	int		ind1;
+	int		ind2;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (a[i] != NULL && a[i]->empty != 0)
-		i++;
-	if (a[i] == NULL || a[i + 1] == NULL)
-		return ;
-	while (a[i + 1] != NULL)
+	j = 0;
+	while (a[i] != NULL)
 	{
-		ft_swapint(&a[i]->num, &a[i + 1]->num);
+		if (e1 == a[i]->num && a[i]->empty != 1)
+			ind1 = j;
+		if (e2 == a[i]->num && a[i]->empty != 1)
+			ind2 = j;
+		if (a[i]->empty == 0)
+			j++;
 		i++;
 	}
-}
-
-void	f_rra(t_elem **a)
-{
-	int		i;
-
-	i = 0;
-	while (a[i + 1] != NULL)
-		i++;
-	while (i >= 1 && a[i - 1]->empty != 1)
-	{
-		ft_swapint(&a[i]->num, &a[i - 1]->num);
-		i--;
-	}
+	*i2 = ind2;
+	return (ind1);
 }
