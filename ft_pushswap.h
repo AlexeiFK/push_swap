@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:43 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:43:13 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/19 23:04:42 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct		t_stacks
 
 void	ft_swapint(int *a, int *b);
 void	f_all(const char *com, t_elem **a, t_elem **b);
+void	f_all_mult(const char *com, const char *com2,
+		t_elem **a, t_elem **b);
 void	f_sa(t_elem **a);
 void	f_ss(t_elem **a, t_elem **b);
 void	f_pb(t_elem **a, t_elem **b);

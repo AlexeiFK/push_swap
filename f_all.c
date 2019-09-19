@@ -6,13 +6,22 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:41:45 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:45:53 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/19 23:08:49 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 #include "ft_pushswap.h"
+
+void	f_all_mult(const char *c1, const char *c2,
+		t_elem **a, t_elem **b)
+{
+	if (c1)
+		f_all(c1, a, b);
+	if (c2)
+		f_all(c2, a, b);
+}
 
 void	f_all3(const char *com, t_elem **a, t_elem **b)
 {
