@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:43 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 22:01:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/20 23:00:59 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void			f_ra_i(t_elem **a, int i);
 
 t_elem			*new_elem(int num, int empty);
 t_elem			**new_arr_elem(int size);
+void			free_elems(t_elem **e);
+void			free_my_stacks(t_stacks *s);
+int				free_stacks_ret_zero(t_stacks *s);
 int				ft_strisdig(char *str);
 int				read_push(t_elem **elems, char **argv, int argc);
 int				is_sorted_stacks(t_stacks *s, int size);

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 21:42:32 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 21:54:27 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/20 23:02:16 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		read_argv(t_stacks *s, char **argv,
 		int argc, int *new_size)
 {
 	int		size;
+	int		ret;
 
 	size = argc - 1;
 	*new_size = size;
@@ -57,11 +58,13 @@ int		read_argv(t_stacks *s, char **argv,
 	s->b = new_arr_elem(size);
 	s->t = new_arr_elem(size);
 	if (read_push(s->a, argv, argc) == 0)
-		return (0);
+		return (free_stacks_ret_zero(s));
 	if (read_push(s->t, argv, argc) == 0)
-		return (0);
+		return (free_stacks_ret_zero(s));
 	sort_elems(s->t, size);
-	return (is_not_dupl(s->t));
+	if (is_not_dupl(s->t) == 0)
+		return (free_stacks_ret_zero(s));
+	return (1);
 }
 
 int		sort_elems(t_elem **a, int size)

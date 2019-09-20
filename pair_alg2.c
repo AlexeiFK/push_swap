@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 20:55:37 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:08:51 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/20 22:37:55 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		find_indexes(t_elem **a, int e1, int e2, int *i2)
 	int		i;
 	int		j;
 
+	ind1 = INT_MAX;
+	ind2 = INT_MAX;
 	i = 0;
 	j = 0;
 	while (a[i] != NULL)

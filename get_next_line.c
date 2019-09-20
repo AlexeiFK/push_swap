@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 07:59:55 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/05 21:18:54 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/20 23:10:25 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static int		gnl_reader(const int fd, char **line, char **content)
 		if (test == -1)
 			return (-1);
 	}
+	free(buffer);
 	return (num);
 }
 

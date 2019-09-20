@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   my_stack_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 07:55:38 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:18:19 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/20 22:46:52 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/20 23:00:45 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
+#include "ft_pushswap.h"
+#include <stdlib.h>
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
+void	free_elems(t_elem **e)
+{
+	int		i;
 
-int		get_next_line(const int fd, char **line);
+	i = 0;
+	while (e[i] != NULL)
+	{
+		free(e[i]);
+		i++;
+	}
+	free(e);
+}
 
-# define BUFF_SIZE 1
+void	free_my_stacks(t_stacks *s)
+{
+	free_elems(s->a);
+	free_elems(s->b);
+	free_elems(s->t);
+}
 
-#endif
+int		free_stacks_ret_zero(t_stacks *s)
+{
+	free_my_stacks(s);
+	return (0);
+}
