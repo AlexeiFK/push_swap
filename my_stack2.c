@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 21:42:32 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:52:27 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/20 21:54:27 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,54 @@
 
 #include <limits.h>
 #include <stdlib.h>
+
+int		is_sorted_stacks(t_stacks *s, int size)
+{
+	int		i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (s->a[i]->empty == 1)
+			return (0);
+		if (s->a[i]->num != s->t[i]->num)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		is_not_dupl(t_elem **t)
+{
+	int		i;
+
+	i = 0;
+	while (t[i + 1] != NULL)
+	{
+		if (t[i]->num == t[i + 1]->num)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		read_argv(t_stacks *s, char **argv,
+		int argc, int *new_size)
+{
+	int		size;
+
+	size = argc - 1;
+	*new_size = size;
+	s->a = new_arr_elem(size);
+	s->b = new_arr_elem(size);
+	s->t = new_arr_elem(size);
+	if (read_push(s->a, argv, argc) == 0)
+		return (0);
+	if (read_push(s->t, argv, argc) == 0)
+		return (0);
+	sort_elems(s->t, size);
+	return (is_not_dupl(s->t));
+}
 
 int		sort_elems(t_elem **a, int size)
 {

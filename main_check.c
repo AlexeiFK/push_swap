@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_stack.c                                       :+:      :+:    :+:   */
+/*   main_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/17 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 21:58:26 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/09/20 21:09:57 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/09/20 21:57:38 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include "libft.h"
 #include "ft_pushswap.h"
 #include <unistd.h>
@@ -23,6 +24,22 @@ static int	error_msg(void)
 	return (0);
 }
 
+int			push_checker(t_stacks *s, int size)
+{
+	char	*str;
+
+	while (get_next_line(0, &str) > 0)
+	{
+		if (f_all_s(str, s->a, s->b) == 0)
+			return (error_msg());
+	}
+	if (is_sorted_stacks(s, size))
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+	return (1);
+}
+
 int			main(int argc, char **argv)
 {
 	t_stacks	stacks;
@@ -32,6 +49,6 @@ int			main(int argc, char **argv)
 		return (0);
 	if (read_argv(&stacks, argv, argc, &size) == 0)
 		return (error_msg());
-	push_swap(&stacks, size);
+	push_checker(&stacks, size);
 	return (0);
 }
