@@ -31,7 +31,7 @@ SRCC= main_check.c ft_pushswap.c f_all.c f_all_s.c funcs3.c funcs2.c funcs.c my_
 
 all: $(NAME_C) $(NAME_PS)
 
-OBJ=$(OBJC) $(OBJPW)
+OBJ=$(OBJC) $(OBJPS)
 OBJC=$(SRCC:.c=.o)
 OBJPS=$(SRCPS:.c=.o)
 
