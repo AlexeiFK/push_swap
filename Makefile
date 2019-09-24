@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/09/24 17:41:51 by rjeor-mo          #+#    #+#              #
+#    Updated: 2019/09/24 17:53:15 by rjeor-mo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME_C=checker
 NAME_PS=push_swap
 
@@ -13,11 +25,11 @@ IDIR=./libft
 
 INCLUDES= -I$(IDIR)
 
+HEADERS= $(HEADERS_C) $(HEADERS_PS)
 HEADERS_C= get_next_line.h ft_pushswap.h
 HEADERS_PS= ft_pushswap.h
 
-#CFLAGS=-Wall -Wextra -Werror $(INCLUDES)
-CFLAGS=-Wall -Wextra $(INCLUDES)
+CFLAGS=-Wall -Wextra -Werror $(INCLUDES)
 
 RM= rm -f
 
@@ -31,16 +43,18 @@ SRCC= main_check.c ft_pushswap.c f_all.c f_all_s.c funcs3.c funcs2.c funcs.c my_
 
 all: $(NAME_C) $(NAME_PS)
 
-OBJ=$(OBJC) $(OBJPS)
 OBJC=$(SRCC:.c=.o)
 OBJPS=$(SRCPS:.c=.o)
+OBJ=$(OBJC) $(OBJPS)
 
 $(NAME_C): $(OBJC) $(HEADERS_C)
 	make -C libft
+	@echo "CHECKER:"
 	$(CC) $(CFLAGS) -o $(NAME_C) $(OBJC) $(LIBFT)
 
 $(NAME_PS): $(OBJPS) $(HEADERS_PS)
 	make -C libft
+	@echo "PUSH_SWAP:"
 	$(CC) $(CFLAGS) -o $(NAME_PS) $(OBJPS) $(LIBFT)
 
 %.o: %.c $(HEADERS)

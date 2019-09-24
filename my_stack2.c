@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 21:42:32 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:02:16 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:12:12 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		read_argv(t_stacks *s, char **argv,
 		int argc, int *new_size)
 {
 	int		size;
-	int		ret;
 
 	size = argc - 1;
 	*new_size = size;

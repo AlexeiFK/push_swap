@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:06:13 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:41:32 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int			main(int argc, char **argv)
 		return (0);
 	if (read_argv(&stacks, argv, argc, &size) == 0)
 		return (error_msg());
-	push_swap(&stacks, size);
+	if (!is_sorted_stacks(&stacks, size))
+		push_swap(&stacks, size);
 	free_my_stacks(&stacks);
 	return (0);
 }

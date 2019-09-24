@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 20:48:09 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 22:46:24 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:37:31 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		ft_strisdig(char *str)
 	if (str[i] == '\0')
 		return (0);
 	if (ft_isdigit(str[i]) == 0 && str[i] != '-')
+		return (0);
+	if (str[i] == '-' && str[i + 1] == '\0')
 		return (0);
 	i++;
 	while (str[i] != '\0')
