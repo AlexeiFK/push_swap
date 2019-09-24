@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 07:59:55 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:10:25 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 21:48:51 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,22 @@ static int		gnl_reader(const int fd, char **line, char **content)
 	return (num);
 }
 
-int				get_next_line(const int fd, char **line)
+void			free_gnl(int flag, char *content)
+{
+	if (flag)
+	{
+		if (content)
+			free(content);
+		exit(0);
+	}
+}
+
+int				get_next_line(const int fd, char **line, int flag)
 {
 	static char			*content = NULL;
 	int					num;
 
+	free_gnl(flag, content);
 	if (!line || fd < 0)
 		return (-1);
 	if (!content)

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 07:55:38 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:18:19 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 21:46:21 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include "libft.h"
 
-int		get_next_line(const int fd, char **line);
+int		get_next_line(const int fd, char **line, int flag);
 
 # define BUFF_SIZE 1
 

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:09:57 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/24 18:07:38 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 21:48:38 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int			push_checker(t_stacks *s, int size)
 {
 	char	*str;
 
-	while (get_next_line(0, &str) > 0)
+	while (get_next_line(0, &str, 0) > 0)
 	{
 		if (f_all_s(str, s->a, s->b) == 0)
 		{
 			free(str);
 			free_my_stacks(s);
+			get_next_line(0, &str, 1);
 			return (error_msg());
 		}
 		free(str);
