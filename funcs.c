@@ -6,12 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:17:37 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 20:55:22 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:05:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
 #include "ft_pushswap.h"
 
 void	ft_swapint(int *a, int *b)

@@ -6,11 +6,10 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:41:45 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 23:08:49 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:03:44 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 #include "ft_pushswap.h"
 

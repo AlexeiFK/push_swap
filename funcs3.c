@@ -6,12 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 21:49:42 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/19 21:51:50 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:06:15 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
 #include "ft_pushswap.h"
 
 void	f_pb(t_elem **a, t_elem **b)

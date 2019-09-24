@@ -6,15 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:16:13 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 21:58:57 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:05:17 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_pushswap.h"
-#include <unistd.h>
-
-#include <limits.h>
 #include <stdlib.h>
 
 void	push_back(t_elem **a, t_elem **b, int size)

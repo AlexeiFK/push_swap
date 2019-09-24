@@ -6,16 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/24 17:41:32 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:07:51 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_pushswap.h"
-#include <unistd.h>
-
-#include <limits.h>
-#include <stdlib.h>
 
 static int	error_msg(void)
 {

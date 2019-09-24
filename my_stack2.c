@@ -6,14 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 21:42:32 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/24 17:12:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:08:41 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_pushswap.h"
-
-#include <limits.h>
 #include <stdlib.h>
 
 int		is_sorted_stacks(t_stacks *s, int size)

@@ -6,15 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 20:53:32 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 22:35:40 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/24 18:09:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_pushswap.h"
-
-#include <limits.h>
-#include <stdlib.h>
 
 int		find_shortest_rot(int size, int ind1, int ind2, int *l2)
 {
