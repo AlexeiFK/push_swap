@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:16:13 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/25 22:14:45 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/25 23:19:17 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@
 #include "limits.h"
 #include "libft.h"
 
+int		find_min(t_stacks *s, int st_a)
+{
+	int		index;
+	int		min;
+
+	min = INT_MAX;
+	index = 0;
+	while (s->a[st_a] != NULL)
+	{
+		if (s->a[st_a]->num < min)
+		{
+			min = s->a[st_a]->num;
+			index = st_a;
+		}
+		++st_a;
+	}
+	return (index);
+}
 void	push_back(t_elem **a, t_elem **b, int size)
 {
 	int		i;
@@ -135,11 +153,20 @@ void	push_it_back(int rc_a, int rc_b, t_stacks *s)
 	f_all_i(s, 1, "pa");
 }
 
+//max case
+//min case
+//reverse rotate add
+
 long long int	n_commands(int rc_a, t_stacks *s, int st_a, int st_b)
 {
 	int		rc_b;
+	int		min;
 
 	rc_b = 0;
+	min = find_min(s, st_a);
+	if (s->a[min] > s->b[st_b])
+	{
+	}
 	while (s->b[st_b + rc_b] != NULL && s->a[st_a + rc_a] != NULL)
 	{
 		ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
@@ -174,7 +201,30 @@ void	correction(t_stacks *s)
 	f_all_i(s, index, "ra");
 }
 
-void	push_one_back(t_stacks *s, int size)
+
+/*
+int		(t_stacks *s, int st_a, int st_b)
+{
+}
+
+int		max_mid_min012(t_stacks *s, int st_a, int st_b)
+{
+	int	max;
+	int	min;
+
+
+	while (s->b[st_b] != NULL && s->a[st_a] != NULL)
+	{
+		if (s->b[st_b + rc_b]->num < s->a[st_a + rc_a]->num)
+		{
+			return (rc_b);
+		}
+		++rc_b;
+	}
+}
+*/
+
+void	push_one_back(t_stacks *s, int size, int *cut)
 {
 	int		st_a;
 	int		st_b;
@@ -189,12 +239,13 @@ void	push_one_back(t_stacks *s, int size)
 	st_a = get_first_id(s->a);
 	st_b = get_first_id(s->b);
 //	ft_printf("starta =%d, startb =%d\n", st_a, st_b);
+	/*
 	if (s->a[st_a]->num > s->b[st_b]->num)
 	{
 		f_all("pa", s->a, s->b);
 		return ;
 	}
-
+*/
 	/*
 	if (s->a[size - 1]->num < s->b[st_b]->num)
 	{
@@ -211,11 +262,13 @@ void	push_one_back(t_stacks *s, int size)
 	while ((st_a + rc_a) < size) // 2)
 	{
 		pret = n_commands(rc_a, s, st_a, st_b);
+		/*
 		if (pret <= rc_a || (rc_a == 0 && pret == 1))
 		{
 			push_it_back(rc_a, pret, s);
 			return ;
 		}
+		*/
 		if (pret < min)
 		{
 			rc_a_tmp = rc_a;
@@ -223,12 +276,16 @@ void	push_one_back(t_stacks *s, int size)
 		}
 		++rc_a;
 	}
+	/*
 		if (pret == (INT_MAX))
 		{
 			f_all("pa", s->a, s->b);
 			f_all("ra", s->a, s->b);
 			return ;
 		}
+		*/
+	*cut = find_min(s, st_a);
+	ft_printf("cut = %d\n", *cut);
 	push_it_back(rc_a_tmp, min, s);
 //	ft_printf("min = %d\n", min);
 	/*
@@ -262,8 +319,10 @@ void	push_swap_new(t_stacks *s, int size)
 //	int		e2;
 	int		i;
 	int		size_ext;
+	int		cut;
 
 	i = 0;
+	cut = size - 3;
 	size_ext = size;
 	while (i < size - 3)
 	{
@@ -276,7 +335,7 @@ void	push_swap_new(t_stacks *s, int size)
 	i = 0;
 	while (i < size - 3)
 	{
-		push_one_back(s, size);
+		push_one_back(s, size, &cut);
 		print_stks(s->a, s->b);
 		i++;
 	}
