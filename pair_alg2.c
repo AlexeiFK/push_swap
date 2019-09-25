@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 20:55:37 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/24 18:10:23 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:53:23 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ int		is_wrong(t_elem **a)
 		return (1);
 	else
 		return (0);
+}
+
+int		get_first_id(t_elem **a)
+{
+	int		i;
+
+	i = 0;
+	while (a[i] != NULL && a[i]->empty != 0)
+		i++;
+	if (a[i] == NULL)
+		return (-1);
+	return (i);
 }
 
 int		find_indexes(t_elem **a, int e1, int e2, int *i2)

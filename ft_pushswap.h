@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:43 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/20 23:00:59 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/25 22:14:43 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ typedef struct	s_elem
 	int			num;
 	int			empty;
 }				t_elem;
+
+typedef struct s_res
+{
+	int			is_simpl;
+	int			rc_a;
+	int			rc_b;
+	int			worst;
+}				t_res;
 
 typedef struct	s_stacks
 {
@@ -40,6 +48,7 @@ void			f_rra(t_elem **a);
 void			f_rrr(t_elem **a, t_elem **b);
 void			f_rr(t_elem **a, t_elem **b);
 void			f_rra_i(t_elem **a, int i);
+void			f_all_i(t_stacks *s, int i, const char *str);
 void			f_ra_i(t_elem **a, int i);
 
 t_elem			*new_elem(int num, int empty);
@@ -55,9 +64,11 @@ void			print_stks(t_elem **a, t_elem **b);
 int				read_argv(t_stacks *s, char **argv,
 				int argc, int *new_size);
 void			push_swap(t_stacks *s, int size);
+void			push_swap_new(t_stacks *s, int size);
 
 void			move_pair(int e1, int e2, t_stacks *s, int size_ext);
 int				is_wrong(t_elem **a);
+int				get_first_id(t_elem **a);
 int				find_indexes(t_elem **a, int e1, int e2, int *i2);
 
 #endif

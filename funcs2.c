@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:40:52 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/24 18:06:03 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/25 21:03:48 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,14 @@ void	f_rra(t_elem **a)
 	{
 		ft_swapint(&a[i]->num, &a[i - 1]->num);
 		i--;
+	}
+}
+
+void	f_all_i(t_stacks *s, int i, const char *str)
+{
+	while (i > 0)
+	{
+		f_all(str, s->a, s->b);
+		--i;
 	}
 }
