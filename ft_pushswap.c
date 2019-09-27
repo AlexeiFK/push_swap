@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:16:13 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/27 22:49:50 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/27 23:54:06 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,7 +424,7 @@ long long int		max_between_two(long long int n1, long long int n2)
 		return (n2);
 }
 
-void	push_one_back(t_stacks *s, int size, int *cut)
+void	push_one_back(t_stacks *s, int size)
 {
 	int		st_a;
 	int		st_b;
@@ -442,145 +442,47 @@ void	push_one_back(t_stacks *s, int size, int *cut)
 	sp_rc_b = LLONG_MAX;
 	st_a = get_first_id(s->a);
 	st_b = get_first_id(s->b);
-//	ft_printf("starta =%d, startb =%d\n", st_a, st_b);
-	/*
-	if (s->a[st_a]->num > s->b[st_b]->num)
-	{
-		f_all("pa", s->a, s->b);
-		return ;
-	}
-*/
-	/*
-	if (s->a[size - 1]->num < s->b[st_b]->num)
-	{
-		if (s->a[size - 1]->num < s->b[st_b]->num)
-		f_all("pa", s->a, s->b);
-		f_all("ra", s->a, s->b);
-		return ;
-	}
-	*/
-
 	rc_a_tmp = 0;
 	rc_a = -1;
 	rc_b = 0;
 	int		flag = 0;
-//	ft_printf("%d<=%d\n", rc_a, size / 2);
 	while ((rc_a) <= (size / 2))
 	{
-//		ft_printf("%d<=%d\n", rc_a, size / 2);
-		/*
-		if (s->a[st_a + rc_a]->num > s->a[st_a + rc_a + 1]->num)
-		{
-			break ;
-		}
-		*/
-		
 		pret = n_commands(rc_a, s, st_a, st_b);
-		/*
-		if (pret == LLONG_MAX - 0)
-		{
-			ft_printf("min\n");
-			sp_rc_b = find_sp_min(s, &sp_rc_a, st_a, st_b);
-		}
-		else if (pret == LLONG_MAX - 1)
-		{
-			sp_rc_b = find_sp_max(s, &sp_rc_a, st_a, st_b);
-		}
-		*/
-		/*
-		if (pret <= rc_a || (rc_a == 0 && pret == 1))
-		{
-			push_it_back(rc_a, pret, s);
-			return ;
-		}
-		*/
 		if (max_between_two(rc_a, pret) < max_between_two(rc_a_tmp, min))
 		{
 			rc_a_tmp = rc_a;
 			min = pret;
 		}
-		/*
-		if (pret < min)
-		{
-			rc_a_tmp = rc_a;
-			min = pret;
-		}
-		*/
-//		ft_printf("res:rc_a =%lld, rc_b =%lld\n, pret = %lld\n", rc_a_tmp + 1, min, pret);
 		++rc_a;
 	}
 	while ((rc_a) < size) // 2)
 	{
-//		ft_printf("%d<=%d\n", rc_a, size);
 		pret = n_commands_rev(rc_a, s, st_a, st_b) - 1; // -1
 		if (pret < 0)
 			pret *= -1;
-		if (max_between_two(rc_a, pret) < max_between_two(rc_a_tmp, min))
-		{
-			rc_a_tmp = rc_a;
-			min = pret;
-		}
-		/*
-		if (pret < min)
+		if (flag == 0 && (max_between_two(size - (rc_a + 1), pret) < max_between_two(rc_a_tmp, min)))
 		{
 			flag = 1;
 			rc_a_tmp = rc_a;
 			min = pret;
 		}
-		*/
-	//	ft_printf("res:rc_a =%lld, rc_b =%lld\n, pret = %lld\n", rc_a_tmp + 1, min, pret);
+		else if (flag == 1 && (max_between_two(size - (rc_a + 1), pret) < max_between_two(size - (rc_a_tmp + 1), min)))
+		{
+			flag = 1;
+			rc_a_tmp = rc_a;
+			min = pret;
+		}
 		++rc_a;
 	}
-	/*
-		if (pret == (INT_MAX))
-		{
-			f_all("pa", s->a, s->b);
-			f_all("ra", s->a, s->b);
-			return ;
-		}
-		*/
-	/*
-	if (sp_is_min(sp_rc_a, sp_rc_b, rc_a_tmp, min))
-	{
-		ft_printf("spmin%d, %d\n", sp_rc_a, sp_rc_b);
-		push_it_back(sp_rc_a, sp_rc_b, s);
-	}
-	else
-	{
-		push_it_back(rc_a_tmp, min, s);
-	}
-	*/
 	if (!flag)
 	{
-//	ft_printf("turn:rc_a =%lld, rc_b =%lld\n", rc_a_tmp + 1, min);
 		push_it_back(rc_a_tmp + 1, min, s);
 	}
 	else
 	{
-//	ft_printf("turn:rc_a =%lld, rc_b =%lld\n", size - (rc_a_tmp + 1), min);
 		push_it_back_rev(size - (rc_a_tmp + 1), min, s);
 	}
-//	else
-//		f_all_i(s, 1, "pa");
-	*cut = find_min(s->a, st_a);
-//	ft_printf("min = %d\n", *cut);
-	*cut = find_max(s->a, st_a);
-//	ft_printf("max = %d\n", *cut);
-//	ft_printf("min = %d\n", min);
-	/*
-	if (s->a[st_a + 1]->num > s->b[st_b]->num)
-	{
-		f_all("ra", s->a, s->b);
-		f_all("pa", s->a, s->b);
-		return ;
-	}
-	if (s->a[st_a + 1]->num > s->b[st_b + 1]->num)
-	{
-		f_all("rr", s->a, s->b);
-		f_all("pa", s->a, s->b);
-		return ;
-	}
-	*/
 }
 
 /*
@@ -617,12 +519,12 @@ void	push_swap_new(t_stacks *s, int size)
 	size_ext = 3;
 	while (i < size - 3)
 	{
-		push_one_back(s, size_ext, &cut);
+		push_one_back(s, size_ext);
 //		print_stks(s->a, s->b);
 		i++;
 		size_ext++;
 	}
 	correction(s);
-//		print_stks(s->a, s->b);
+//	print_stks(s->a, s->b);
 //	push_back(s->a, s->b, size - size_ext);
 }
