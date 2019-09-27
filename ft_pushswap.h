@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:43 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/25 22:14:43 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:15:26 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct	s_stacks
 	t_elem		**a;
 	t_elem		**b;
 	t_elem		**t;
+	int			size;
+	int			min_case;
+	int			max_case;
 }				t_stacks;
 
 void			ft_swapint(int *a, int *b);

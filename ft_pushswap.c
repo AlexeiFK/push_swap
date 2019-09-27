@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:16:13 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/25 23:19:17 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/27 21:21:55 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,44 @@
 #include "limits.h"
 #include "libft.h"
 
-int		find_min(t_stacks *s, int st_a)
+int		find_min(t_elem **a, int st_a)
 {
 	int		index;
 	int		min;
 
 	min = INT_MAX;
 	index = 0;
-	while (s->a[st_a] != NULL)
+	while (a[st_a] != NULL)
 	{
-		if (s->a[st_a]->num < min)
+		if (a[st_a]->num < min)
 		{
-			min = s->a[st_a]->num;
+			min = a[st_a]->num;
 			index = st_a;
 		}
 		++st_a;
 	}
 	return (index);
 }
+
+int		find_max(t_elem **a, int st_a)
+{
+	int		index;
+	int		max;
+
+	max = INT_MIN;
+	index = 0;
+	while (a[st_a] != NULL)
+	{
+		if (a[st_a]->num > max)
+		{
+			max = a[st_a]->num;
+			index = st_a;
+		}
+		++st_a;
+	}
+	return (index);
+}
+
 void	push_back(t_elem **a, t_elem **b, int size)
 {
 	int		i;
@@ -153,31 +173,176 @@ void	push_it_back(int rc_a, int rc_b, t_stacks *s)
 	f_all_i(s, 1, "pa");
 }
 
+void	push_it_back_rev(int rc_a, int rc_b, t_stacks *s)
+{
+	int		ra_c;
+	int		rb_c;
+	int		rr_c;
+
+	ra_c = 0;
+	rb_c = 0;
+	rr_c = 0;
+//	ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+	if (rc_a < rc_b)
+	{
+		rr_c = rc_a;
+		rb_c = rc_b - rc_a;
+	}
+	else
+	{
+		rr_c = rc_b;
+		ra_c = rc_a - rc_b;
+	}
+	f_all_i(s, rr_c, "rrr");
+	f_all_i(s, rb_c, "rrb");
+	f_all_i(s, ra_c, "rra");
+	f_all_i(s, 1, "pa");
+}
 //max case
 //min case
 //reverse rotate add
 
-long long int	n_commands(int rc_a, t_stacks *s, int st_a, int st_b)
+long long int	n_commands_rev(int rc_a, t_stacks *s, int st_a, int st_b)
 {
 	int		rc_b;
+	int		st_b_tmp;
 	int		min;
+	int		max;
 
 	rc_b = 0;
-	min = find_min(s, st_a);
-	if (s->a[min] > s->b[st_b])
+	st_b_tmp = st_b;
+	st_b = s->size - 1;
+	min = find_min(s->a, st_a);
+	max = find_max(s->a, st_a);
+	s->max_case = 0;
+	s->min_case = 0;
+	while ((st_b_tmp <= rc_b + st_b) && s->a[st_a + rc_a + 1] != NULL)
 	{
-	}
-	while (s->b[st_b + rc_b] != NULL && s->a[st_a + rc_a] != NULL)
-	{
-		ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
-		if (s->b[st_b + rc_b]->num < s->a[st_a + rc_a]->num)
+	//	ft_printf("num is: %d\nbetween =%d:%d\n", s->b[st_b + rc_b]->num, s->a[s->size - 1]->num, s->a[st_a]->num);
+//		ft_printf("(rev)num is: %d\nbetween =%d:%d\n", s->b[st_b + rc_b]->num, s->a[st_a + rc_a]->num, s->a[st_a + rc_a + 1]->num);
+//		ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+		if (s->a[st_a + rc_a]->num > s->a[st_a + rc_a + 1]->num &&
+				((s->b[st_b + rc_b]->num > s->a[max]->num) || (s->b[st_b + rc_b]->num < s->a[min]->num)))
 		{
-		ft_printf("!rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+//			ft_printf("CUT\n", rc_a, rc_b);
 			return (rc_b);
+		}
+		/*
+		if (s->a[min]->num > s->b[st_b]->num)
+		{
+			ft_printf("min_case%d\n", s->b[st_b]->num);
+			return (rc_b);
+		}
+		else if (s->a[max]->num < s->b[st_b]->num)
+		{
+			ft_printf("max_case%d\n", s->b[st_b]->num);
+			return (LLONG_MAX - 1);
+		}
+		*/
+		if (s->b[st_b + rc_b]->num > s->a[st_a + rc_a]->num)
+		{
+			if (s->b[st_b + rc_b]->num < s->a[st_a + rc_a + 1]->num)
+			{
+	//		ft_printf("!rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+			return (rc_b);
+			}
+		}
+		--rc_b;
+	}
+	return (LLONG_MAX - 2);
+}
+
+long long int	n_commands(int rc_a, t_stacks *s, int st_a, int st_b)
+{
+	int				rc_b;
+	long long int	rc_b_min;
+	int				min;
+	int				max;
+
+	rc_b = 0;
+	rc_b_min = LLONG_MAX - 2;
+	min = find_min(s->a, st_a);
+	max = find_max(s->a, st_a);
+	s->max_case = 0;
+	s->min_case = 0;
+	if (rc_a == -1)
+	{
+		while (s->b[st_b + rc_b] != NULL)
+		{
+//			ft_printf("num is: %d\nbetween =%d:%d\n", s->b[st_b + rc_b]->num, s->a[s->size - 1]->num, s->a[st_a]->num);
+//			ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+			if (s->a[s->size - 1]->num > s->a[st_a]->num &&
+					((s->b[st_b + rc_b]->num > s->a[max]->num) || (s->b[st_b + rc_b]->num < s->a[min]->num)))
+			{
+//				ft_printf("CUT\n", rc_a, rc_b);
+				if (rc_b < rc_b_min)
+					rc_b_min = rc_b;
+//				return (rc_b);
+			}
+			if (s->b[st_b + rc_b]->num > s->a[s->size - 1]->num)
+			{
+				if (s->b[st_b + rc_b]->num < s->a[st_a]->num)
+				{
+//				ft_printf("!rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+				if (rc_b < rc_b_min)
+					rc_b_min = rc_b;
+//				return (rc_b);
+				}
+			}
+			++rc_b;
+		}
+		return (LLONG_MAX - 2);
+	}
+	while (s->b[st_b + rc_b] != NULL && s->a[st_a + rc_a + 1] != NULL)
+	{
+//		ft_printf("num is: %d\nbetween =%d:%d, min is %d, max is %d\n",
+	//			s->b[st_b + rc_b]->num, s->a[st_a + rc_a]->num, s->a[st_a + rc_a + 1]->num,
+	//			s->a[min]->num, s->a[max]->num);
+//		ft_printf("rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+		if (s->a[st_a + rc_a]->num > s->a[st_a + rc_a + 1]->num &&
+				((s->b[st_b + rc_b]->num > s->a[max]->num) || (s->b[st_b + rc_b]->num < s->a[min]->num)))
+		{
+//			ft_printf("CUT\n", rc_a, rc_b);
+				if (rc_b < rc_b_min)
+					rc_b_min = rc_b;
+//			return (rc_b);
+		}
+		/*
+		if (s->a[st_a + rc_a]->num > s->a[st_a + rc_a + 1]->num)
+		{
+			if ((s->b[st_b + rc_b]->num > s->a[st_a + rc_a + 1]->num) && (s->b[st_b + rc_b]->num < s->a[st_a + rc_a]->num))
+			{
+				ft_printf("CUT-\n", rc_a, rc_b);
+				return (rc_b);
+			}
+		}
+		*/
+		/*
+		if (s->a[min]->num > s->b[st_b]->num)
+		{
+			ft_printf("min_case%d\n", s->b[st_b]->num);
+			return (rc_b);
+		}
+		else if (s->a[max]->num < s->b[st_b]->num)
+		{
+			ft_printf("max_case%d\n", s->b[st_b]->num);
+			return (LLONG_MAX - 1);
+		}
+		*/
+		if (s->b[st_b + rc_b]->num > s->a[st_a + rc_a]->num)
+		{
+			if (s->b[st_b + rc_b]->num < s->a[st_a + rc_a + 1]->num)
+			{
+	//		ft_printf("!rc_a =%d, rc_b =%d\n", rc_a, rc_b);
+				if (rc_b < rc_b_min)
+					rc_b_min = rc_b;
+//			return (rc_b);
+			}
 		}
 		++rc_b;
 	}
-	return (INT_MAX);
+	ft_printf("!rc_b_min =%lld\n", rc_a, rc_b_min);
+	return (rc_b_min);
 }
 
 void	correction(t_stacks *s)
@@ -198,7 +363,10 @@ void	correction(t_stacks *s)
 		}
 		i++;
 	}
-	f_all_i(s, index, "ra");
+	if (index < (s->size / 2))
+		f_all_i(s, index, "ra");
+	else
+		f_all_i(s, s->size - index, "rra");
 }
 
 
@@ -224,6 +392,62 @@ int		max_mid_min012(t_stacks *s, int st_a, int st_b)
 }
 */
 
+
+long long int	find_sp_min(t_stacks *s, long long int *s_rc_a, int st_a, int st_b)
+{
+	long long int	s_rc_b;
+	int				min_b;
+	int				min;
+	int				max;
+
+	min = find_min(s->a, st_a);
+	max = find_max(s->a, st_a);
+	min_b = find_min(s->b, st_b);
+	s_rc_b = st_b - min_b;
+	if (max == (s->size - 1) && (min == st_a))
+		*s_rc_a = 0;
+	else
+		*s_rc_a = max - st_a;
+	return (s_rc_b);
+}
+
+long long int	find_sp_max(t_stacks *s, long long int *s_rc_a, int st_a, int st_b)
+{
+	long long int	s_rc_b;
+	int				max_b;
+	int				min;
+	int				max;
+
+	min = find_min(s->a, st_a);
+	max = find_max(s->a, st_a);
+	max_b = find_max(s->b, st_b);
+	s_rc_b = st_b - max_b;
+	if (max == (s->size - 1) && (min == st_a))
+		*s_rc_a = 0;
+	else
+		*s_rc_a = max - st_a;
+	return (s_rc_b);
+}
+
+int		sp_is_min(long long int s_rc_a, long long int s_rc_b, int rc_a, int rc_b)
+{
+	long long int		max_s;
+	int					max_n;
+
+	if (s_rc_a > s_rc_b)
+		max_s = s_rc_a;
+	else
+		max_s = s_rc_b;
+	if (rc_a > rc_b)
+		max_n = rc_a;
+	else
+		max_n = rc_b;
+	if (max_n < max_s)
+		return (0);
+	else
+		return (1);
+}
+
 void	push_one_back(t_stacks *s, int size, int *cut)
 {
 	int		st_a;
@@ -232,10 +456,14 @@ void	push_one_back(t_stacks *s, int size, int *cut)
 	int		rc_a;
 	int		rc_a_tmp;
 	int		rc_b;
-	int		min;
-	int		pret;
+	long long int		min;
+	long long int		pret;
+	long long int		sp_rc_a;
+	long long int		sp_rc_b;
 
-	min = size;
+	min = LLONG_MAX - 2;
+	sp_rc_a = LLONG_MAX;
+	sp_rc_b = LLONG_MAX;
 	st_a = get_first_id(s->a);
 	st_b = get_first_id(s->b);
 //	ft_printf("starta =%d, startb =%d\n", st_a, st_b);
@@ -257,11 +485,37 @@ void	push_one_back(t_stacks *s, int size, int *cut)
 	*/
 
 	rc_a_tmp = 0;
-	rc_a = 0;
+	rc_a = -1;
 	rc_b = 0;
-	while ((st_a + rc_a) < size) // 2)
+	int		flag = 0;
+//	ft_printf("%d<=%d\n", rc_a, size / 2);
+	while ((rc_a) <= (size / 2))
 	{
+//		ft_printf("%d<=%d\n", rc_a, size / 2);
+		/*
+		if (s->a[st_a + rc_a]->num > s->a[st_a + rc_a + 1]->num)
+		{
+			break ;
+		}
+		*/
+		
 		pret = n_commands(rc_a, s, st_a, st_b);
+		/*
+		if (pret == LLONG_MAX - 0)
+		{
+			ft_printf("min\n");
+			sp_rc_b = find_sp_min(s, &sp_rc_a, st_a, st_b);
+		}
+		else if (pret == LLONG_MAX - 1)
+		{
+			sp_rc_b = find_sp_max(s, &sp_rc_a, st_a, st_b);
+		}
+		*/
+		if (pret == LLONG_MAX - 2)
+		{
+//			ft_printf("cant plase\n");
+//			sp_rc_b = find_sp_min(s, &sp_rc_a, st_a, st_b);
+		}
 		/*
 		if (pret <= rc_a || (rc_a == 0 && pret == 1))
 		{
@@ -273,7 +527,24 @@ void	push_one_back(t_stacks *s, int size, int *cut)
 		{
 			rc_a_tmp = rc_a;
 			min = pret;
+//			ft_printf("new min\n");
 		}
+//		ft_printf("res:rc_a =%lld, rc_b =%lld\n, pret = %lld\n", rc_a_tmp + 1, min, pret);
+		++rc_a;
+	}
+	while ((rc_a) < size) // 2)
+	{
+//		ft_printf("%d<=%d\n", rc_a, size);
+		pret = n_commands_rev(rc_a, s, st_a, st_b) - 1; // -1
+		if (pret < 0)
+			pret *= -1;
+		if (pret < min)
+		{
+			flag = 1;
+			rc_a_tmp = rc_a;
+			min = pret;
+		}
+//		ft_printf("res:rc_a =%lld, rc_b =%lld\n, pret = %lld\n", rc_a_tmp + 1, min, pret);
 		++rc_a;
 	}
 	/*
@@ -284,9 +555,33 @@ void	push_one_back(t_stacks *s, int size, int *cut)
 			return ;
 		}
 		*/
-	*cut = find_min(s, st_a);
-	ft_printf("cut = %d\n", *cut);
-	push_it_back(rc_a_tmp, min, s);
+	/*
+	if (sp_is_min(sp_rc_a, sp_rc_b, rc_a_tmp, min))
+	{
+		ft_printf("spmin%d, %d\n", sp_rc_a, sp_rc_b);
+		push_it_back(sp_rc_a, sp_rc_b, s);
+	}
+	else
+	{
+		push_it_back(rc_a_tmp, min, s);
+	}
+	*/
+	if (!flag)
+	{
+//	ft_printf("turn:rc_a =%lld, rc_b =%lld\n", rc_a_tmp + 1, min);
+		push_it_back(rc_a_tmp + 1, min, s);
+	}
+	else
+	{
+//	ft_printf("turn:rc_a =%lld, rc_b =%lld\n", size - (rc_a_tmp + 1), min);
+		push_it_back_rev(size - (rc_a_tmp + 1), min, s);
+	}
+//	else
+//		f_all_i(s, 1, "pa");
+	*cut = find_min(s->a, st_a);
+//	ft_printf("min = %d\n", *cut);
+	*cut = find_max(s->a, st_a);
+//	ft_printf("max = %d\n", *cut);
 //	ft_printf("min = %d\n", min);
 	/*
 	if (s->a[st_a + 1]->num > s->b[st_b]->num)
@@ -317,6 +612,7 @@ void	push_swap_new(t_stacks *s, int size)
 {
 //	int		e1;
 //	int		e2;
+	
 	int		i;
 	int		size_ext;
 	int		cut;
@@ -324,6 +620,7 @@ void	push_swap_new(t_stacks *s, int size)
 	i = 0;
 	cut = size - 3;
 	size_ext = size;
+	s->size = size;
 	while (i < size - 3)
 	{
 		f_all("pb", s->a, s->b);
@@ -333,11 +630,13 @@ void	push_swap_new(t_stacks *s, int size)
 	push_swap_special(s, size_ext);
 		print_stks(s->a, s->b);
 	i = 0;
+	size_ext = 3;
 	while (i < size - 3)
 	{
-		push_one_back(s, size, &cut);
+		push_one_back(s, size_ext, &cut);
 		print_stks(s->a, s->b);
 		i++;
+		size_ext++;
 	}
 	correction(s);
 		print_stks(s->a, s->b);
