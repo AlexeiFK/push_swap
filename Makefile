@@ -6,7 +6,7 @@
 #    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 17:41:51 by rjeor-mo          #+#    #+#              #
-#    Updated: 2019/09/28 21:07:43 by rjeor-mo         ###   ########.fr        #
+#    Updated: 2019/09/28 23:10:43 by rjeor-mo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,12 @@ RM= rm -f
 SRC=$(SRCPS) $(SRCC)
 
 SRCPS= main_stack.c ft_pushswap.c f_all.c f_all_s.c funcs3.c funcs2.c funcs.c my_stack_free.c\
-       my_stack.c my_stack2.c new_alg.c n_commands.c n_commands_rev.c \
-	   n_min_max.c pair_alg.c pair_alg2.c n_push_one_back.c n_sort_three.c
+       my_stack.c my_stack2.c n_commands.c n_commands_rev.c \
+	   n_min_max.c pair_alg2.c n_push_one_back.c n_sort_three.c
 
 SRCC= main_check.c ft_pushswap.c f_all.c f_all_s.c funcs3.c funcs2.c funcs.c my_stack_free.c \
       my_stack.c my_stack2.c get_next_line.c n_commands.c n_commands_rev.c \
-	  n_min_max.c pair_alg.c pair_alg2.c n_push_one_back.c n_sort_three.c
+	  n_min_max.c pair_alg2.c n_push_one_back.c n_sort_three.c
 
 all: $(NAME_C) $(NAME_PS)
 

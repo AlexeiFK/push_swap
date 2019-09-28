@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:43 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/09/28 22:20:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/09/28 23:06:54 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct			s_elem
 	int					empty;
 }						t_elem;
 
-typedef struct			 s_res
+typedef struct			s_res
 {
 	int					flag;
 	int					rc_a_tmp;
@@ -30,7 +30,7 @@ typedef struct			 s_res
 	long long int		pret;
 }						t_res;
 
-typedef struct	s_stacks
+typedef struct			s_stacks
 {
 	t_elem				**a;
 	t_elem				**b;
@@ -38,7 +38,8 @@ typedef struct	s_stacks
 	int					size;
 }						t_stacks;
 
-long long int			n_commands_rev(int rc_a, t_stacks *s, int st_a, int st_b);
+long long int			n_commands_rev(int rc_a, t_stacks *s,
+						int st_a, int st_b);
 long long int			n_commands(int rc_a, t_stacks *s, int st_a, int st_b);
 void					ft_swapint(int *a, int *b);
 int						f_all_s(const char *com, t_elem **a, t_elem **b);
@@ -78,7 +79,6 @@ void					push_one_back(t_stacks *s, int size);
 void					push_it_back(int rc_a, int rc_b, t_stacks *s);
 void					push_it_back_rev(int rc_a, int rc_b, t_stacks *s);
 long long int			max_between_two(long long int n1, long long int n2);
-
 
 void					move_pair(int e1, int e2, t_stacks *s, int size_ext);
 int						is_wrong(t_elem **a);
